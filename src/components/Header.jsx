@@ -11,11 +11,14 @@ import Navbar from './Navbar';
 function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
   const [isOpenNow, setIsopenNow] = useState(true)
-
+  const [todayData, setTodayData] = useState(null)
+  
   useEffect(() => {
     if(openingsData) {
       setIsDataLoaded(true)
-      setIsopenNow(openingsData.open_now)
+      setIsopenNow(true)
+      setTodayData(openingsData[new Date().getDay() - 1])
+    
     }
   }, [openingsData])
 
@@ -46,7 +49,7 @@ function Header({openingsData}) {
               <MaterialSymbol icon="schedule" size={32} fill={false} grade={-25} color='white' />
               {isDataLoaded && (
                 <>
-                  <p>{openingsData.weekday_text[new Date().getDay() - 1]}
+                  <p>{`${todayData.day}: ${todayData.open}-${todayData.close}`}
                     </p>
                 </>
               )}

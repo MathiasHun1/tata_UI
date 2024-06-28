@@ -11,7 +11,7 @@ import services from './services/data'
 
 
 function App() {
-  const [isDataLoaded, setIsDataLoaded] = useState(false)
+  const [isDataLoaded, setIsDataLoaded] = useState(true)
   const [openingsData, setOpeningsData] = useState(null)
 
   useEffect(() => {
