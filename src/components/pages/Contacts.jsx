@@ -1,7 +1,7 @@
 import MapIframe from '../MapIframe';
 import fblogo from '../../assets/fblogo.svg'
 import { mapRedirectUrl } from '../helpers';
-import { translateDay } from '../helpers';
+import { translateDay, transformOpening } from '../helpers';
 import LoadingPage from '../LoadingPage';
 
 const mapStyle = {
@@ -34,7 +34,7 @@ function Contacts({openingsData}) {
           <ul>
             <strong>Nyitvatartás:</strong>
             {openingsData.map(element =>
-              <p key={element.day} className="w-max p-1">{`${translateDay(element.day)}: ${element.open} - ${element.close}`}</p>)}
+              <p key={element.day} className="w-max p-1">{`${translateDay(element.day)}: ${transformOpening(element.open, element.close)}`}</p>)}
           </ul>
           <MapIframe mapStyle={mapStyle} /> 
         </section>

@@ -19,10 +19,40 @@ const translateDay = (dayName) => {
   }
 }
 
-const transformNull = (text) => {
-  if(text.includes('null')) {
+const transformOpening = (open, close) => {
+  if(open === null || close === null) {
     return 'Zárva'
+  } else {
+    return `${open}-${close}`
   }
 }
 
-export {mapRedirectUrl, translateDay}
+
+const checkIfOpen = (openingsData) => {
+  const today = openingsData[new Date().getDay() - 1]
+  console.log(today.day);
+  
+  if(today.open === null || today.close === null) {
+    return false
+  }
+
+  const openingTime = transformTimeString(today.open)
+  const closingTime = transformTimeString(today.close)
+  const currentTime = new Date()
+
+  if(currentTime >= openingTime && currentTime <= closingTime) {
+    return true
+  }
+  return false
+}
+
+const transformTimeString = (timeString) => {
+  const [hours, minutes] = timeString.split('.').map(item => Number(item))
+  const now = new Date()
+  now.setHours(hours, minutes, 0, 0)
+
+  return now
+}
+
+
+export { mapRedirectUrl, translateDay, transformOpening, checkIfOpen }

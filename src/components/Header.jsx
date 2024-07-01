@@ -6,7 +6,7 @@ import HeaderCard from './HeaderCard'
 import HoverableHeaderCard from './HoverableHeaderCard';
 import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
-import { mapRedirectUrl, translateDay } from './helpers';
+import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening } from './helpers';
 
 function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
@@ -18,10 +18,9 @@ function Header({openingsData}) {
       setIsDataLoaded(true)
       setIsopenNow(true)
       setTodayData(openingsData[new Date().getDay() - 1])
+      setIsopenNow(checkIfOpen(openingsData))
     }
   }, [openingsData])
-
-
 
   return (
     <header className='h-56 pt-6 text-zinc-100 flex items-start bg-black bg-gradient-to-r from-neutral-950 to-neutral-500 sticky top-0 z-10'>
@@ -49,7 +48,7 @@ function Header({openingsData}) {
               <MaterialSymbol icon="schedule" size={32} fill={false} grade={-25} color='white' />
               {isDataLoaded && (
                 <>
-                  <p>{`${translateDay(todayData.day)}: ${todayData.open}-${todayData.close}`}
+                  <p>{`${translateDay(todayData.day)}: ${transformOpening(todayData.open, todayData.close)}`}
                     </p>
                 </>
               )}
