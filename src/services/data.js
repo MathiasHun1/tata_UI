@@ -7,4 +7,10 @@ const getAllDays = () => {
   return request.then(response =>  response.data)
 }
 
-export default { getAllDays }
+const updateDay = (dayData) => {
+  const request = axios.put(`${baseUrl}/${dayData.day}`,
+    {open: dayData.open, close: dayData.close})
+  return request.then(response => console.log(response))
+}
+
+export default { getAllDays, updateDay }

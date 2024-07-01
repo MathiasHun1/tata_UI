@@ -30,7 +30,6 @@ const transformOpening = (open, close) => {
 
 const checkIfOpen = (openingsData) => {
   const today = openingsData[new Date().getDay() - 1]
-  console.log(today.day);
   
   if(today.open === null || today.close === null) {
     return false

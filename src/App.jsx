@@ -19,10 +19,6 @@ function App() {
       .then(initialOpenings => setOpeningsData(initialOpenings)) 
   }, [])
 
-  useEffect(() => {
-    console.log(openingsData)
-  }, [openingsData])
-
   if(!isDataLoaded) {
     return <LoadingPage />
   } else {
@@ -31,7 +27,9 @@ function App() {
           <Router>
               <Header openingsData={openingsData} />
               <div className="flex flex-row">
-                <Main openingsData={openingsData} />
+                <Main 
+                  openingsData={openingsData}
+                  setOpeningsData={setOpeningsData}   />
                 <Aside />
               </div>
           </Router>
