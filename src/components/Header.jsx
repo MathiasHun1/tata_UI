@@ -4,9 +4,9 @@ import { MaterialSymbol } from 'react-material-symbols';
 import 'react-material-symbols/rounded'
 import HeaderCard from './HeaderCard'
 import HoverableHeaderCard from './HoverableHeaderCard';
-import {mapRedirectUrl} from './Mapcomponent'
 import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
+import { mapRedirectUrl, translateDay } from './helpers';
 
 function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
@@ -18,9 +18,9 @@ function Header({openingsData}) {
       setIsDataLoaded(true)
       setIsopenNow(true)
       setTodayData(openingsData[new Date().getDay() - 1])
-    
     }
   }, [openingsData])
+
 
 
   return (
@@ -49,7 +49,7 @@ function Header({openingsData}) {
               <MaterialSymbol icon="schedule" size={32} fill={false} grade={-25} color='white' />
               {isDataLoaded && (
                 <>
-                  <p>{`${todayData.day}: ${todayData.open}-${todayData.close}`}
+                  <p>{`${translateDay(todayData.day)}: ${todayData.open}-${todayData.close}`}
                     </p>
                 </>
               )}

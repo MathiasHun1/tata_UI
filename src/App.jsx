@@ -3,11 +3,11 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
-import loading2 from './assets/loading2.gif'
 import Header from "./components/Header"
 import Main from "./components/Main"
 import Aside from "./components/Aside"
 import services from './services/data'
+import LoadingPage from "./components/LoadingPage"
 
 
 function App() {
@@ -23,7 +23,9 @@ function App() {
     console.log(openingsData)
   }, [openingsData])
 
-  if(isDataLoaded) {
+  if(!isDataLoaded) {
+    return <LoadingPage />
+  } else {
     return (
         <div className="relative">
           <Router>
@@ -34,12 +36,6 @@ function App() {
               </div>
           </Router>
         </div>
-    )
-  } else {
-    return (
-      <div className="w-full h-screen flex justify-center items-center">
-        <img src={loading2} alt="Loading .." />
-      </div>
     )
   }
 }

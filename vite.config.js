@@ -7,9 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://maps.googleapis.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+       target: 'http://localhost:3001/'
       }
     }
   }
