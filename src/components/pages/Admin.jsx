@@ -13,7 +13,7 @@ function Admin({ openingsData, setOpeningsData }) {
     close: ''
   })
 
-  const pass = import.meta.env.VITE_PASS
+  const pass = import.meta.env.VITE_PASS || process.env.pass
 
   useEffect(() => {
     console.log(isChecked);
