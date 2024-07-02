@@ -7,6 +7,7 @@ import HoverableHeaderCard from './HoverableHeaderCard';
 import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening } from './helpers';
+import logo3 from '../assets/tatamoto-fekete.svg'
 
 function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
@@ -59,7 +60,7 @@ function Header({openingsData}) {
       </div>
 
       <div>
-        <div className="bg-white bg-center bg-no-repeat w-44 h-44 rounded-full absolute right-12" style={{ backgroundImage: `url(${logo2})`, backgroundSize: '95%' }}>
+        <div className="bg-white bg-center bg-no-repeat w-44 h-44 rounded-full absolute right-12" style={{ backgroundImage: `url(${logo3})`, backgroundSize: '85%' }}>
         </div>
       </div>
      

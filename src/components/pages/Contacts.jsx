@@ -19,28 +19,26 @@ function Contacts({openingsData}) {
     return <LoadingPage />
   } else {
     return (
-      <div className='max-w-4xl px-12 pt-8 mx-auto text-md flex flex-col items-center gap-10'>
-        <section className='text-xl flex flex-col gap-4'>
-
+      <div className='max-w-4xl px-12 pt-8 mx-auto flex flex-col items-center gap-10'>
+        <section className='text-xl '>
 
           <p><strong>Cím:</strong> <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target='_blank'>1201 Budapest, Szondi utca 11</a></p>
 
-
           <p><strong>Telefon:</strong> +36 30 4147026</p>
-
         </section>
 
-        <section className='w-full h-full  flex flex-wrap justify-center gap-4'>
-          <ul>
+        <MapIframe mapStyle={mapStyle} /> 
+
+        <div className='w-full text-xl flex flex-start'>
+          <ul >
             <strong>Nyitvatartás:</strong>
             {openingsData.map(element =>
-              <p key={element.day} className="w-max p-1">{`${translateDay(element.day)}: ${transformOpening(element.open, element.close)}`}</p>)}
+            <li key={element.day} className="w-max mb-1">{`${translateDay(element.day)}: ${transformOpening(element.open, element.close)}`}</li>)}
           </ul>
-          <MapIframe mapStyle={mapStyle} /> 
-        </section>
+        </div>
 
-          <a href='https://www.facebook.com/pong.ping.96592' target='_blank' className='flex flex-row items-center gap-1'>Kövess <span><img src={fblogo} alt="" style={{width: '100px'}} /></span>-on!
-          </a>
+        <a href='https://www.facebook.com/pong.ping.96592' target='_blank' className='flex flex-row items-center gap-1'>Kövess <span><img src={fblogo} alt="" style={{width: '100px'}} /></span>-on!
+        </a>
       </div>
     )
   }

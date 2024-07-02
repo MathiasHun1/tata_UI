@@ -8,11 +8,20 @@ import Main from "./components/Main"
 import Aside from "./components/Aside"
 import services from './services/data'
 import LoadingPage from "./components/LoadingPage"
+import szerelo from './assets/szerelo.jpeg'
 
 
 function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(true)
   const [openingsData, setOpeningsData] = useState(null)
+
+  const backGroundStyle = {
+    backgroundImage: `url(${szerelo})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain',
+    filter: 'blur(2px)',
+    filter: 'opacity(0.15)'
+  }
 
   useEffect(() => {
     services.getAllDays()
@@ -33,7 +42,11 @@ function App() {
                 <Aside />
               </div>
           </Router>
+
+          {/* <div style={backGroundStyle} className="absolute w-full h-full top-0 top-52 -z-10">
+          </div> */}
         </div>
+
     )
   }
 }
