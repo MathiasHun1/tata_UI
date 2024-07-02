@@ -27,14 +27,14 @@ function Admin({ openingsData, setOpeningsData }) {
     }
   }, [isChecked])
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (isLoggedIn === true) {
-        setIsLoggedIn(false)
-        setPassText('')
-      }
-    }, 500000)
-  }, [isLoggedIn])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (isLoggedIn === true) {
+  //       setIsLoggedIn(false)
+  //       setPassText('')
+  //     }
+  //   }, 500000)
+  // }, [isLoggedIn])
 
   const handlePassInputChange = (e) => {
     setPassText(e.target.value)
@@ -103,10 +103,11 @@ function Admin({ openingsData, setOpeningsData }) {
 
   if(isLoggedIn) {
     return (
-      <>
-        <form onSubmit={handleSubmit}>
-          <p>Nyitvatartás</p>
-          <p>*formátum: 8.00 - 16.30</p>
+      <div className="flex flex-col items-center ">
+        <form onSubmit={handleSubmit} className="bg-gray-300 p-4 pb-8 w-fit h-fit flex flex-col items-center gap-2 rounded-md">
+          <p className="font-bold text-lg">Nyitvatartás</p>
+          <p>*formátum: ÓÓ.PP (pl: 8.00 - 16.30)</p>
+          <div className="flex gap-2">
             <select name="day" value={formData.day} onChange={handleInputChange}>
               <option value="monday">Hétfő</option>
               <option value="tuesday">Kedd</option>
@@ -116,20 +117,32 @@ function Admin({ openingsData, setOpeningsData }) {
               <option value="saturday">Szombat</option>
               <option value="sunday">Vasárnap</option>
             </select>
-            <input type="number" value={formData.open} name="open" onChange={handleInputChange} className="w-16"/>
-            <span> - </span>
-            <input type="number" value={formData.close} name="close" onChange={handleInputChange} className="w-16"/>
-            <label onClick={toggleRadio}>
-              Zárva
-              <input type="radio" checked={isChecked} />
-            </label>
-            <br />
-          <button className="btn" type="submit">Mentés</button>
+            <div>
+              <input type="number" value={formData.open} name="open" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''}`}/>
+              <span> - </span>
+              <input type="number" value={formData.close} name="close" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''}`}/>
+            </div>
+            
+            <div onClick={toggleRadio} className=" flex flex-row items-center gap-1">
+              <label>
+                Zárva
+              </label>
+                <input type="radio" checked={isChecked} className=""/>
+            </div>
+          </div>
+          <br />
+          <div>
+            <button className="btn w-28 bg-green-300 hover:bg-green-400" type="submit">
+              Mentés
+            </button>
+            <button className="btn w-28 bg-red-300 hover:bg-red-400" onClick={logOut}>
+              Kijelentkezek
+            </button>
+          </div>
         </form>
-        <button className="btn" onClick={logOut}>Kijelentkezek</button>
-        {succesMessage && <h1 className="p-2 text-xl bg-lime-100 border-2 border-lime-500 rounded-xl">Mentés sikeres</h1>}
-        {errorMessage && <h1 className="p-2 text-xl bg-red-100 border-2 border-red-500 rounded-xl">Valami nem sikerült Kutya!</h1>}
-      </>
+        {succesMessage && <h1 className="p-2 w-full flex justify-center text-xl bg-lime-100 border-2 border-lime-500 rounded-xl">Mentés sikeres</h1>}
+        {errorMessage && <h1 className="w-full flex justify-center p-2 text-xl bg-red-100 border-2 border-red-500 rounded-xl">Valamit elírtál, Kutya!</h1>}
+      </div>
     )
   } else {
     return (
