@@ -19,7 +19,7 @@ function Contacts({openingsData}) {
     return <LoadingPage />
   } else {
     return (
-      <div className='max-w-4xl px-12 pt-8 mx-auto flex flex-col items-center gap-10'>
+      <div className='max-w-4xl px-12 pt-8 sm:pt-0 mx-auto flex flex-col items-center gap-10'>
         <section className='text-xl '>
 
           <p><strong>Cím:</strong> <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target='_blank'>1201 Budapest, Szondi utca 11</a></p>

@@ -24,13 +24,7 @@ import motor16 from '../../assets/motor-16.jpeg'
 
 function Gallery() {
   return (
-    <div className='max-w-5xl'>
-      {/* <div className="grid gap-2 justify-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 bg-red-200">
-        <ImageCard image={szerelo} />
-        <ImageCard image={szerelo} />
-        <ImageCard image={szerelo} />
-        <ImageCard image={szerelo} />
-      </div> */}
+    <div className='max-w-5xl pt-8 sm:pt-0'>
       <h1 className='text-center text-xl'>
         A Műhely
       </h1>

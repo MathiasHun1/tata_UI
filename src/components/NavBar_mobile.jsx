@@ -2,6 +2,7 @@ import { useState } from "react"
 import { MaterialSymbol } from "react-material-symbols"
 import NavButton from "./NavButton"
 import { Link } from "react-router-dom"
+import { mapRedirectUrl } from "./helpers"
 
 function NavBar_mobile() {
   const [menuOpened, setMenuopened] = useState(false)
@@ -13,10 +14,10 @@ function NavBar_mobile() {
 
   return (
     <>
-      <div className="sm:hidden h-16 bg-sky-400 flex flex-row items-center justify-between  sticky top-0">
+      <div className="sm:hidden h-16 bg-sky-400 flex flex-row items-center justify-between  sticky top-0 z-20">
 
-        <div className="flex items-center text-sm gap-8 relative">
-          <span>1201 Bp Szondi utca 11</span>
+        <div className="pl-2 flex items-center text-sm gap-8 relative">
+        <a className='text-blue-800 hover:underline' href={mapRedirectUrl} target="_blank">1201 Budapest Szondi utca 11</a>
           <span>+36(30) 414 7026</span>
         </div>
 
@@ -24,8 +25,8 @@ function NavBar_mobile() {
           <MaterialSymbol icon="menu" size={54} fill={false} grade={-25} color='white'/>
         </div>
 
-        <nav className={`absolute bg-sky-400 opacity-0 w-full flex flex-col items-center justify-center top-16
-        ${menuOpened ? "animate-opens" : ""}`}>
+        <nav className={`absolute bg-sky-400 opacity-0 w-full flex flex-col items-center justify-center top-16 pointer-events-none 
+        ${menuOpened ? "animate-opens pointer-events-auto flex" : "hidden"}`}>
           <Link to={'/about'} style={{'width': '100%'}}>
             <NavButton text={'Rólam'} toggleMenu={toggleMenu}/>
           </Link>
