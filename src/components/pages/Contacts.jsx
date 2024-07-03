@@ -1,5 +1,6 @@
 import MapIframe from '../MapIframe';
 import fblogo from '../../assets/fblogo.svg'
+import googlelogo from '../../assets/google-logo.svg'
 import { mapRedirectUrl } from '../helpers';
 import { translateDay, transformOpening } from '../helpers';
 import LoadingPage from '../LoadingPage';
@@ -19,8 +20,15 @@ function Contacts({openingsData}) {
     return <LoadingPage />
   } else {
     return (
-      <div className='max-w-4xl px-12 pt-8 sm:pt-0 mx-auto flex flex-col items-center gap-10'>
+      <div className='max-w-4xl px-12 pt-4 sm:pt-0 mx-auto flex flex-col items-center gap-10'>
         <section className='text-xl '>
+
+          <div className='sm:hidden mb-8 mt-4 flex flex-row items-center justify-between gap-8'>
+            <a href='https://www.facebook.com/pong.ping.96592' target='_blank' className='hover:cursor-pointer'><img src={fblogo} alt="" style={{width: '100px'}} />
+            </a>
+            <a href={mapRedirectUrl} target='_blank' className='pt-1'><img src={googlelogo} alt="" style={{width: '100px'}} />
+            </a>
+          </div>
 
           <p><strong>Cím:</strong> <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target='_blank'>1201 Budapest, Szondi utca 11</a></p>
 
@@ -37,8 +45,10 @@ function Contacts({openingsData}) {
           </ul>
         </div>
 
-        <a href='https://www.facebook.com/pong.ping.96592' target='_blank' className='flex flex-row items-center gap-1'>Kövess <span><img src={fblogo} alt="" style={{width: '100px'}} /></span>-on!
+        <a href='https://www.facebook.com/pong.ping.96592' target='_blank' className='flex flex-row items-center gap-1 hidden sm:flex'>Kövess <span><img src={fblogo} alt="" style={{width: '100px'}} /></span>-on!
         </a>
+
+        
       </div>
     )
   }

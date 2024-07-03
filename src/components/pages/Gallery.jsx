@@ -39,7 +39,7 @@ function Gallery() {
       <div className='max-w-5xl pt-8 pb-80 sm:pt-0
       relative'>
           <div className='mb-4 w-full flex justify-center'>
-            <ImageCard image={szerelo} style={style} />
+            <ImageCard image={szerelo} style={style} setClickedImage={setClickedImage}/>
           </div>
         <h1 className='text-center text-xl'>
           A Műhely
@@ -77,9 +77,10 @@ function Gallery() {
     )
   } else {
     return (
-      <div className='max-w-5xl pt-8 pb-80 sm:pt-0
+      <div className='max-w-5xl flex flex-col items-center w-full pt-8 pb-80 px-4 sm:pt-0 hover:cursor-pointer
       relative'>
-          <img src={clickedImage} onClick={() => setClickedImage(null)} alt="" />
+          <img src={clickedImage} onClick={() => setClickedImage(null)} alt="" className='sm:w-4/6 w-full rounded-md'/>
+          <p className='text-blue-400 hover:text-blue-800 hover:cursor-pointer' onClick={() => setClickedImage(null)}>{'<<'}Vissza</p>
       </div>
     )
   }
