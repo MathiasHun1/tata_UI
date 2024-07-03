@@ -21,46 +21,68 @@ import motor13 from '../../assets/motor-13.jpeg'
 import motor14 from '../../assets/motor-14.jpeg'
 import motor15 from '../../assets/motor-15.jpeg'
 import motor16 from '../../assets/motor-16.jpeg'
+import { useState } from 'react'
 
 function Gallery() {
-  return (
-    <div className='max-w-5xl pt-8 sm:pt-0'>
-      <h1 className='text-center text-xl'>
-        A Műhely
-      </h1>
+  const [clickedImage, setClickedImage] = useState(null)
 
-      <div className="p-2 flex flex-wrap flex-row items-center justify-center gap-3 ">
-        <ImageCard image={muhely1} />
-        <ImageCard image={muhely2} />
-        <ImageCard image={muhely3} />
-        <ImageCard image={muhely5} />
-        <ImageCard image={muhely4} />
+  const resetClicked = () => {
+    setClickedImage(null)
+  }
+  
+  const style = {
+    'height': 'fit-content',
+  }
+
+  if(!clickedImage) {
+    return (
+      <div className='max-w-5xl pt-8 pb-80 sm:pt-0
+      relative'>
+          <div className='mb-4 w-full flex justify-center'>
+            <ImageCard image={szerelo} style={style} />
+          </div>
+        <h1 className='text-center text-xl'>
+          A Műhely
+        </h1>
+  
+        <div className="p-2 flex flex-wrap flex-row items-center justify-center gap-3 -z-10">
+          <ImageCard image={muhely1} setClickedImage={setClickedImage}/>
+          <ImageCard image={muhely2} setClickedImage={setClickedImage}/>
+          <ImageCard image={muhely3} setClickedImage={setClickedImage}/>
+          <ImageCard image={muhely5} setClickedImage={setClickedImage}/>
+          <ImageCard image={muhely4} setClickedImage={setClickedImage}/>
+        </div>
+  
+        <h1 className='text-center text-xl mt-4'>
+          Munkáim
+        </h1>
+  
+        <div className="p-4 flex flex-wrap flex-row items-center justify-center gap-3 ">
+          <ImageCard image={motor7} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor11} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor16} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor1} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor12} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor4} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor2} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor5} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor8} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor9} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor10} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor13} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor14} setClickedImage={setClickedImage}/>
+          <ImageCard image={motor15} setClickedImage={setClickedImage}/>
+        </div>
       </div>
-
-      <h1 className='text-center text-xl mt-4'>
-        Munkáim
-      </h1>
-
-      <div className="p-4 flex flex-wrap flex-row items-center justify-center gap-3 ">
-        <ImageCard image={motor7} />
-        <ImageCard image={motor11} />
-        <ImageCard image={motor16} />
-        <ImageCard image={motor1} />
-        <ImageCard image={motor12} />
-        {/* <ImageCard image={motor3} /> */}
-        <ImageCard image={motor4} />
-        <ImageCard image={motor2} />
-        <ImageCard image={motor5} />
-        <ImageCard image={motor8} />
-        <ImageCard image={motor9} />
-        <ImageCard image={motor10} />
-        <ImageCard image={motor13} />
-        <ImageCard image={motor14} />
-        <ImageCard image={motor15} />
-    
+    )
+  } else {
+    return (
+      <div className='max-w-5xl pt-8 pb-80 sm:pt-0
+      relative'>
+          <img src={clickedImage} onClick={() => setClickedImage(null)} alt="" />
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Gallery
