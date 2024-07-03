@@ -7,7 +7,7 @@ import { mapRedirectUrl } from "./helpers"
 
 function Aside({isDataLoaded, reviewsList, reviewsAvg, reviewsQuant}) {
   return (
-    <aside className="flex flex-col items-center ">
+    <aside className="flex flex-col items-center hidden sm:flex">
 
       <div className="card w-64 bg-white shadow-none pt-8 pb-12 border-b-2 w-66   text-center rounded-none flex flex-col items-center">
         <p className="text-xl"><strong>Kövess itt is:</strong></p>

@@ -7,7 +7,7 @@ function Navbar() {
   const [active, setActive] = useState(null)
 
   return (
-    <div className="relative">
+    <div className="sm:block relative hidden">
       <nav className='w-full absolute top-10 flex items-center justify-around'
         >
           <div className="rounded-md overflow-hidden">

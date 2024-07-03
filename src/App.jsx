@@ -8,7 +8,9 @@ import Main from "./components/Main"
 import Aside from "./components/Aside"
 import services from './services/data'
 import LoadingPage from "./components/LoadingPage"
+import NavBar_mobile from "./components/NavBar_mobile"
 import szerelo from './assets/szerelo.jpeg'
+
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
         <div className="relative">
           <Router>
               <Header openingsData={openingsData} />
+              <NavBar_mobile />
               <div className="flex flex-row">
                 <Main 
                   openingsData={openingsData}

@@ -14,7 +14,7 @@ function Main({openingsData, setOpeningsData}) {
   }
 
   return (
-      <main className=" w-full min-h-96 pt-14 flex justify-center">
+      <main className=" w-full min-h-96 pt-14 flex justify-center -z-10">
         <Routes>
           <Route path='/' element={<About />}/>
           <Route path='/about' element={<About />}/>
