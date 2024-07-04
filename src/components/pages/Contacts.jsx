@@ -4,6 +4,7 @@ import googlelogo from '../../assets/google-logo.svg'
 import { mapRedirectUrl } from '../helpers';
 import { translateDay, transformOpening } from '../helpers';
 import LoadingPage from '../LoadingPage';
+import Phone_num from '../Phone_num';
 
 const mapStyle = {
   width: '100%',
@@ -32,7 +33,7 @@ function Contacts({openingsData}) {
 
           <p><strong>Cím:</strong> <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target='_blank'>1201 Budapest, Szondi utca 11</a></p>
 
-          <p><strong>Telefon:</strong> +36 30 4147026</p>
+          <p><strong>Telefon:</strong> <Phone_num /> </p>
         </section>
 
         <MapIframe mapStyle={mapStyle} /> 

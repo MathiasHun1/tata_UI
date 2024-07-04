@@ -3,6 +3,7 @@ import { MaterialSymbol } from "react-material-symbols"
 import NavButton from "./NavButton"
 import { Link } from "react-router-dom"
 import { mapRedirectUrl } from "./helpers"
+import Phone_num from "./Phone_num"
 
 function NavBar_mobile() {
   const [menuOpened, setMenuopened] = useState(false)
@@ -18,7 +19,7 @@ function NavBar_mobile() {
 
         <div className="pl-2 flex items-center text-sm gap-8 relative">
         <a className='text-blue-800 hover:underline' href={mapRedirectUrl} target="_blank">1201 Budapest Szondi utca 11</a>
-          <span>+36(30) 414 7026</span>
+          <span><Phone_num /></span>
         </div>
 
         <div className="hover:cursor-pointer" onClick={toggleMenu}>

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening } from './helpers';
 import logo3 from '../assets/tatamoto-fekete.svg'
+import Phone_num from './Phone_num'
 
 function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
@@ -49,7 +50,7 @@ function Header({openingsData}) {
           <div className=' gap-6 hidden sm:flex'>
             <HeaderCard>
               <MaterialSymbol icon="call" size={32} fill={false} grade={-25} color='white' />
-              <p>+36(30) 414 7026</p>
+              <Phone_num />
             </HeaderCard>
             <HeaderCard className="w-28 flex flex-col items-center gap-2 hover:cursor-pointer">
             <MaterialSymbol icon="home" size={32} fill={false} grade={-25} color='white' />
