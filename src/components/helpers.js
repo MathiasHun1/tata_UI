@@ -27,9 +27,16 @@ const transformOpening = (open, close) => {
   }
 }
 
+const getDayIndex = () => {
+  if(new Date().getDay() === 0) {
+    return 6
+  } else {
+    return new Date().getDay()-1
+  }
+}
 
-const checkIfOpen = (openingsData) => {
-  const today = openingsData[new Date().getDay() - 1]
+const checkIfOpen =  (openingsData) => {
+  const today = openingsData[getDayIndex()]
   
   if(today.open === null || today.close === null) {
     return false
@@ -54,4 +61,4 @@ const transformTimeString = (timeString) => {
 }
 
 
-export { mapRedirectUrl, translateDay, transformOpening, checkIfOpen }
+export { mapRedirectUrl, translateDay, transformOpening, checkIfOpen, getDayIndex }

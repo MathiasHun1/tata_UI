@@ -6,7 +6,7 @@ import HeaderCard from './HeaderCard'
 import HoverableHeaderCard from './HoverableHeaderCard';
 import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
-import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening } from './helpers';
+import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening, getDayIndex } from './helpers';
 import logo3 from '../assets/tatamoto-fekete.svg'
 import Phone_num from './Phone_num'
 
@@ -14,12 +14,13 @@ function Header({openingsData}) {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
   const [isOpenNow, setIsopenNow] = useState(true)
   const [todayData, setTodayData] = useState(null)
+
   
   useEffect(() => {
     if(openingsData) {
       setIsDataLoaded(true)
       setIsopenNow(true)
-      setTodayData(openingsData[new Date().getDay() - 1])
+      setTodayData(openingsData[getDayIndex()])
       setIsopenNow(checkIfOpen(openingsData))
     }
   }, [openingsData])
