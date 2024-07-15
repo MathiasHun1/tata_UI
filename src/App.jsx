@@ -9,25 +9,21 @@ import Aside from "./components/Aside"
 import services from './services/data'
 import LoadingPage from "./components/LoadingPage"
 import NavBar_mobile from "./components/NavBar_mobile"
-import szerelo from './assets/szerelo.jpeg'
+import VacationCard from "./components/VacationCard"
 
 
 
 function App() {
-  const [isDataLoaded, setIsDataLoaded] = useState(true)
+  const [isDataLoaded, setIsDataLoaded] = useState(false)
   const [openingsData, setOpeningsData] = useState(null)
-
-  const backGroundStyle = {
-    backgroundImage: `url(${szerelo})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    filter: 'blur(2px)',
-    filter: 'opacity(0.15)'
-  }
+  const [onVacation, setOnVacation] = useState(true)
 
   useEffect(() => {
     services.getAllDays()
-      .then(initialOpenings => setOpeningsData(initialOpenings)) 
+      .then(initialOpenings => {
+        setOpeningsData(initialOpenings)
+        setIsDataLoaded(true)
+      }) 
   }, [])
 
   if(!isDataLoaded) {
@@ -45,9 +41,9 @@ function App() {
                 <Aside />
               </div>
           </Router>
-
-          {/* <div style={backGroundStyle} className="absolute w-full h-full top-0 top-52 -z-10">
-          </div> */}
+          {onVacation && (
+            <VacationCard />
+          )}
         </div>
 
     )
