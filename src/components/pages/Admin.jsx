@@ -3,7 +3,7 @@ import services from '../../services/data'
 
 function Admin({ openingsData, setOpeningsData }) {
   const [dataLoaded, setDataLoaded] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [passText, setPassText] = useState('')
   const [isChecked, setIsChecked] = useState(false)
   const [succesMessage, setSuccessMessage] = useState(null)
