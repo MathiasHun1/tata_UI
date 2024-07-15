@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import vacationPic from '../assets/vacation1.jpg'
 import { MaterialSymbol } from 'react-material-symbols'
 import 'react-material-symbols/rounded'
+import services from '../services/data'
 
-function VacationCard() {
+function VacationCard({ text }) {
   const [isHidden, setISHidden] = useState(false)
 
   return (
@@ -13,8 +14,8 @@ function VacationCard() {
         <h1 className="mb-8 text-2xl font-bold text-center">Tisztelt Ügyfeleim!
         </h1>
 
-        <p className="text-justify " >
-          Július 23-31-ig a műhely szabadság miatt zárva tart, addig is problémamentes motorozást mindenkinek!
+        <p className="text-justify text-xl" >
+          {text}
         </p>
 
 

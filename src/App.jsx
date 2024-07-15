@@ -17,6 +17,7 @@ function App() {
   const [isDataLoaded, setIsDataLoaded] = useState(false)
   const [openingsData, setOpeningsData] = useState(null)
   const [onVacation, setOnVacation] = useState(true)
+  const [text, setText] = useState(null)
 
   useEffect(() => {
     services.getAllDays()
@@ -24,6 +25,12 @@ function App() {
         setOpeningsData(initialOpenings)
         setIsDataLoaded(true)
       }) 
+    
+    services.getVacationsData()
+      .then(response => {
+        setOnVacation(response[0].onVacation)
+        setText(response[0].text)
+      })
   }, [])
 
   if(!isDataLoaded) {
@@ -42,7 +49,7 @@ function App() {
               </div>
           </Router>
           {onVacation && (
-            <VacationCard />
+            <VacationCard  text={text}/>
           )}
         </div>
 
