@@ -37,7 +37,7 @@ function App() {
     return <LoadingPage />
   } else {
     return (
-        <div className="relative">
+        <div className="relative text-black">
           <Router>
               <Header openingsData={openingsData} />
               <NavBar_mobile />
