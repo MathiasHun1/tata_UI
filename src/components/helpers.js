@@ -60,5 +60,14 @@ const transformTimeString = (timeString) => {
   return now
 }
 
+const sortByDays = (daysArray) => {
+  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
-export { mapRedirectUrl, translateDay, transformOpening, checkIfOpen, getDayIndex }
+  const sortedDaysArray = daysArray.sort((a, b) => {
+    return days.indexOf(a.day) - days.indexOf(b.day)
+  })
+  return sortedDaysArray
+}
+
+
+export { mapRedirectUrl, translateDay, transformOpening, checkIfOpen, getDayIndex, sortByDays }

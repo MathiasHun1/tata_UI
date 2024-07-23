@@ -1,3 +1,4 @@
+import { sortByDays } from '../components/helpers'
 import axios from 'axios'
 
 const baseUrl = '/api/openings'
@@ -5,7 +6,10 @@ const vacationsUrl = '/api/vacations'
 
 const getAllDays = () => {
   const request = axios.get(baseUrl)
-  return request.then(response =>  response.data)
+  return request.then(response => {
+    const sortedDays = sortByDays(response.data)
+    return sortedDays
+  })
 }
 
 const updateDay = (dayData) => {
