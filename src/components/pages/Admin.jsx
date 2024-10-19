@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import services from '../../services/data'
+import loginService from '../../services/login'
 
 function Admin({ openingsData, setOpeningsData }) {
   const [dataLoaded, setDataLoaded] = useState(false)
@@ -20,8 +21,7 @@ function Admin({ openingsData, setOpeningsData }) {
   })
 
 
-  const pass = import.meta.env.VITE_PASS || process.env.pass
-  console.log(vacationsData.text);
+  // const pass = import.meta.env.VITE_PASS || process.env.pass
   useEffect(() => {
     if(isChecked === true) {
       const data = {
@@ -70,13 +70,17 @@ function Admin({ openingsData, setOpeningsData }) {
     setPassText(e.target.value)
   }
 
-  const handlePassSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-
-    if(passText === pass) {
+    console.log(passText);
+    
+    const response = await loginService.login(passText)
+    if (response.status === 200) {
       setIsLoggedIn(true)
-      setPassText('')
+    } else {
+      setErrorMessage(response.message)
     }
+    setPassText('')
   }
 
   const logOut = () => {
@@ -199,7 +203,7 @@ function Admin({ openingsData, setOpeningsData }) {
     )
   } else {
     return (
-      <form onSubmit={handlePassSubmit}>
+      <form onSubmit={handleLogin}>
         <label>
           Jelszó:
           <input type="password" value={passText} onChange={handlePassInputChange} className="border-2 border-black px-2"/>
