@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import vacationPic from '../assets/vacation1.jpg'
 import { MaterialSymbol } from 'react-material-symbols'
 import 'react-material-symbols/rounded'
-import services from '../services/data'
+// import services from '../services/data'
 
 function VacationCard({ text }) {
   const [isHidden, setISHidden] = useState(false)

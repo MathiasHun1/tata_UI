@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
-import services from '../../services/data'
+// import services from '../../services/data'
 import loginService from '../../services/login'
+import { useDispatch, useSelector } from 'react-redux'
+import { initializeVacationData } from "../../app/vacationsSlice"
 
 function Admin({ openingsData, setOpeningsData }) {
   const [dataLoaded, setDataLoaded] = useState(false)
@@ -15,12 +17,16 @@ function Admin({ openingsData, setOpeningsData }) {
     open: '',
     close: ''
   })
-  const [vacationsData, setVacationsData] = useState({
-    onVacation: true,
-    text: ''
-  })
+  // const [vacationsData, setVacationsData] = useState({
+  //   onVacation: true,
+  //   text: ''
+  // })
 
+  const vacationsData = useSelector(state => state.vacation)
+  // console.log(vacationsData);
 
+  const dispatch = useDispatch()
+  
   // const pass = import.meta.env.VITE_PASS || process.env.pass
   useEffect(() => {
     if(isChecked === true) {
@@ -34,12 +40,8 @@ function Admin({ openingsData, setOpeningsData }) {
   }, [isChecked])
 
   useEffect(() => {
-    services.getVacationsData()
-      .then(result => {
-        setVacationsData(result[0])
-        setDataLoaded(true)
-      })
-  }, [])
+    dispatch(initializeVacationData())
+  }, [dispatch])
 
   const toggleVacation = () => {
     const vacationObj = {...vacationsData}
@@ -72,7 +74,6 @@ function Admin({ openingsData, setOpeningsData }) {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    console.log(passText);
     
     const response = await loginService.login(passText)
     if (response.status === 200) {

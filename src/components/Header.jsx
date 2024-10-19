@@ -1,36 +1,20 @@
-import logo from '../assets/tatamoto.jpg'
-import logo2 from '../assets/logo2.jpeg'
 import { MaterialSymbol } from 'react-material-symbols';
 import 'react-material-symbols/rounded'
 import HeaderCard from './HeaderCard'
 import HoverableHeaderCard from './HoverableHeaderCard';
-import { useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import { mapRedirectUrl, translateDay, checkIfOpen, transformOpening, getDayIndex } from './helpers';
 import logo3 from '../assets/tatamoto-fekete.svg'
 import Phone_num from './Phone_num'
+import { useSelector } from 'react-redux';
 
-function Header({openingsData}) {
-  const [isDataLoaded, setIsDataLoaded] = useState(false)
-  const [isOpenNow, setIsopenNow] = useState(true)
-  const [todayData, setTodayData] = useState(null)
-
-  
-  useEffect(() => {
-    if(openingsData) {
-      setIsDataLoaded(true)
-      setIsopenNow(true)
-      setTodayData(openingsData[getDayIndex()])
-      setIsopenNow(checkIfOpen(openingsData))
-    }
-  }, [openingsData])
+function Header() {
+  const openingDays = useSelector(state => state.openingDays)
+  const isOpenNow = checkIfOpen(openingDays)
+  const todayData = openingDays[getDayIndex()]
 
   return (
     <header className='sm:h-56 pt-6 pb-4 sm:pb-0  text-zinc-100 flex items-center sm:items-start flex-col sm:flex-row bg-black bg-gradient-to-r from-neutral-950 to-neutral-500 sm:sticky top-0 z-20'>
-
-      {/* <div className='sm:hidden '>
-        <MaterialSymbol icon="menu" size={52} fill={false} grade={-25} color='white' />
-      </div> */}
 
       <div className='flex gap-2 items-center absolute top-0 left-0'>
         <div className=''>
@@ -58,14 +42,10 @@ function Header({openingsData}) {
               <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target="_blank">1201 Budapest Szondi utca 11</a>
             </HeaderCard>
         
-            <HoverableHeaderCard openingsData={openingsData}>
+            <HoverableHeaderCard openingsData={openingDays}>
               <MaterialSymbol icon="schedule" size={32} fill={false} grade={-25} color='white' />
-              {isDataLoaded && (
-                <>
                   <p>{`${translateDay(todayData.day)}: ${transformOpening(todayData.open, todayData.close)}`}
                     </p>
-                </>
-              )}
             </HoverableHeaderCard>
           </div>
         </div>
