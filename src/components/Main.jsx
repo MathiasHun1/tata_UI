@@ -5,7 +5,7 @@ import Contacts from "./pages/Contacts"
 import Admin from './pages/Admin'
 import szerelo from '../assets/szerelo.jpeg'
 
-function Main({openingsData, setOpeningsData}) {
+function Main() {
   const backGroundStyle = {
     backgroundImage: `url(${szerelo})`,
     backgroundRepeat: 'no-repeat',
@@ -19,8 +19,8 @@ function Main({openingsData, setOpeningsData}) {
           <Route path='/' element={<About />}/>
           <Route path='/about' element={<About />}/>
           <Route path='/gallery' element={<Gallery />}/>
-          <Route path='/contacts' element={<Contacts openingsData={openingsData} />}/>
-          <Route path='/admin' element={<Admin setOpeningsData={setOpeningsData} />}/>
+          <Route path='/contacts' element={<Contacts />}/>
+          <Route path='/admin' element={<Admin />}/>
         </Routes>
       </main>
   )

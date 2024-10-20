@@ -1,33 +1,25 @@
 import { useEffect, useState } from "react"
-// import services from '../../services/data'
 import loginService from '../../services/login'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeVacationData } from "../../app/vacationsSlice"
+import ErrorMessage from "../ErrorMessage"
+import { updateDay } from "../../app/openingsSlice"
+import { setErrorMessage } from "../../app/messageSlice"
 
-function Admin({ openingsData, setOpeningsData }) {
-  const [dataLoaded, setDataLoaded] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+const Admin = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [passText, setPassText] = useState('')
   const [isChecked, setIsChecked] = useState(false)
-  const [succesMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [succesMessage2, setSuccessMessage2] =useState(null)
   const [formData, setFormData ] = useState({
     day: 'monday',
     open: '',
     close: ''
   })
-  // const [vacationsData, setVacationsData] = useState({
-  //   onVacation: true,
-  //   text: ''
-  // })
 
   const vacationsData = useSelector(state => state.vacation)
-  // console.log(vacationsData);
 
   const dispatch = useDispatch()
   
-  // const pass = import.meta.env.VITE_PASS || process.env.pass
   useEffect(() => {
     if(isChecked === true) {
       const data = {
@@ -74,13 +66,16 @@ function Admin({ openingsData, setOpeningsData }) {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    
-    const response = await loginService.login(passText)
-    if (response.status === 200) {
+    try {
+      await loginService.login(passText)
       setIsLoggedIn(true)
-    } else {
-      setErrorMessage(response.message)
+    } catch (error) {
+      dispatch(setErrorMessage('hibas jelszo'))
+      setTimeout(() => {
+        dispatch(setErrorMessage(''))
+      }, 3000)
     }
+
     setPassText('')
   }
 
@@ -104,29 +99,24 @@ function Admin({ openingsData, setOpeningsData }) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const dayObject = {
-      day: formData.day,
-      open: formData.open,
-      close: formData.close
+    try {
+      const dayObject = {
+        day: formData.day,
+        open: formData.open,
+        close: formData.close
+      }
+  
+      dispatch(updateDay(dayObject))
+    } catch (error) {
+      if (error) {
+        console.log(error);
+        
+        setErrorMessage('Valamit rosszul írtál Kutya')
+        setTimeout(() =>{
+          setErrorMessage('')
+        }, 3000)
+      }
     }
-
-    services.updateDay(dayObject)
-      .then(response => {
-        return services.getAllDays()
-      })
-      .then(response => {
-        setOpeningsData(response)
-        setSuccessMessage(true)
-        setTimeout(() => {
-          setSuccessMessage(null)
-        }, 4000)
-      })
-      .catch(error => {
-        setErrorMessage(true)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 4000)
-      })
 
     setFormData({
       day: 'monday',
@@ -144,7 +134,7 @@ function Admin({ openingsData, setOpeningsData }) {
             <p className="font-bold text-lg">Nyitvatartás</p>
             <p>*formátum: ÓÓ.PP (pl: 8.00 - 16.30)</p>
             <div className="flex gap-2">
-              <select name="day" value={formData.day} onChange={handleInputChange}>
+              <select className="bg-white" name="day" value={formData.day} onChange={handleInputChange}>
                 <option value="monday">Hétfő</option>
                 <option value="tuesday">Kedd</option>
                 <option value="wednesday">Szerda</option>
@@ -154,16 +144,16 @@ function Admin({ openingsData, setOpeningsData }) {
                 <option value="sunday">Vasárnap</option>
               </select>
               <div>
-                <input type="number" value={formData.open} name="open" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''}`}/>
+                <input type="number" value={formData.open} name="open" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''} bg-white`}/>
                 <span> - </span>
-                <input type="number" value={formData.close} name="close" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''}`}/>
+                <input type="number" value={formData.close} name="close" onChange={handleInputChange} className={`w-16 ${isChecked ? 'bg-red-400' : ''} bg-white`}/>
               </div>
               
               <div onClick={toggleRadio} className=" flex flex-row items-center gap-1">
                 <label>
                   Zárva
                 </label>
-                  <input type="radio" checked={isChecked} className=""/>
+                  <input type="radio" checked={isChecked} onChange={() => setIsChecked(!isChecked)} className=""/>
               </div>
             </div>
             <br />
@@ -176,11 +166,9 @@ function Admin({ openingsData, setOpeningsData }) {
               </button>
             </div>
           </form>
-          {succesMessage && <h1 className="p-2 w-full flex justify-center text-xl bg-lime-100 border-2 border-lime-500 rounded-xl">Mentés sikeres</h1>}
-          {errorMessage && <h1 className="w-full flex justify-center p-2 text-xl bg-red-100 border-2 border-red-500 rounded-xl">Valamit elírtál, Kutya!</h1>}
+          <ErrorMessage />
         </div>
-
-        {dataLoaded && (
+        
         <div className="flex flex-col items-center">
           <form onSubmit={submitVacation} className="bg-gray-300 w-full p-4 pb-8 w-fit   h-fit flex flex-col items-center gap-2 rounded-md">
 
@@ -197,20 +185,21 @@ function Admin({ openingsData, setOpeningsData }) {
               Mentés
             </button>
           </form>
-          {succesMessage2 && <h1 className="p-2 w-full flex justify-center text-xl bg-lime-100 border-2 border-lime-500 rounded-xl">Mentés sikeres</h1>}
         </div>
-        )}
       </div>
     )
   } else {
     return (
-      <form onSubmit={handleLogin}>
-        <label>
-          Jelszó:
-          <input type="password" value={passText} onChange={handlePassInputChange} className="border-2 border-black px-2"/>
-        </label>
-        <button className="btn">OK</button>
-      </form>
+      <div>
+        <form onSubmit={handleLogin}>
+          <label>
+            Jelszó:
+            <input type="password" value={passText} onChange={handlePassInputChange} className="border-2 border-black px-2 dark:bg-slate-100"/>
+          </label>
+          <button className="btn">OK</button>
+        </form>
+        <ErrorMessage />
+      </div>
     )
   }
 }

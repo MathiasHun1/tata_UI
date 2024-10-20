@@ -11,10 +11,10 @@ const getAllDays = () => {
   })
 }
 
-const updateDay = (dayData) => {
-  const request = axios
-    .put(`${baseUrl}/${dayData.day}`, {open: dayData.open, close: dayData.close})
-  return request.then(response => console.log(response))
+const updateDay = async (dayData) => {
+  const response = await axios.put(`${baseUrl}/${dayData.day}`, {open: dayData.open, close: dayData.close})
+  console.log('server response data: ', response.data);
+  return response.data
 }
 
 export default { getAllDays, updateDay }

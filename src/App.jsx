@@ -23,7 +23,7 @@ function App({getState}) {
   if(!openingDays) { return <LoadingPage /> } 
 
   return (
-    <div className="relative text-black">
+    <div className="relative text-black dark:bg-white">
       <Router>
           <Header openingsData={openingDays} />
           <NavBar_mobile />

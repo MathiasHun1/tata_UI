@@ -42,7 +42,7 @@ function Header() {
               <a className='hover:text-sky-400 hover:underline' href={mapRedirectUrl} target="_blank">1201 Budapest Szondi utca 11</a>
             </HeaderCard>
         
-            <HoverableHeaderCard openingsData={openingDays}>
+            <HoverableHeaderCard >
               <MaterialSymbol icon="schedule" size={32} fill={false} grade={-25} color='white' />
                   <p>{`${translateDay(todayData.day)}: ${transformOpening(todayData.open, todayData.close)}`}
                     </p>
