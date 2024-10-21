@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import loginService from '../../services/login'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { initializeVacationData } from "../../app/vacationsSlice"
 import ErrorMessage from "../ErrorMessage"
 import { setErrorMessage } from "../../app/messageSlice"
@@ -9,7 +9,7 @@ import AdminForm_openings from "../AdminForm_openings"
 import AdminForm_vacation from "../AdminForm_vacation"
 
 const Admin = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [passText, setPassText] = useState('')
   
   const dispatch = useDispatch()
@@ -62,7 +62,7 @@ return (
 
     
     <div className="flex flex-col items-center">
-      <AdminForm_vacation />
+      <AdminForm_vacation setIsLoggedIn={setIsLoggedIn}/>
     </div>
 
   </div>

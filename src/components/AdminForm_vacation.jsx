@@ -1,20 +1,16 @@
 import { Checkbox } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { setText } from "../app/vacationsSlice"
 import { saveVacationData } from "../app/vacationsSlice"
-import { initializeVacationData } from "../app/vacationsSlice"
 
-const AdminForm_vacation = () => {
+const AdminForm_vacation = ({ setIsLoggedIn }) => {
     const [checked, setChecked] = useState(false)
     const [fieldText, setFieldText] = useState('')
     const vacationsData = useSelector(state => state.vacation)
     
-    
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(initializeVacationData())
         setFieldText(vacationsData.text)
     }, [vacationsData.text])
 
@@ -33,10 +29,10 @@ const AdminForm_vacation = () => {
     }
 
   return (
-    <form onSubmit={submitVacation} className="bg-gray-300 w-full p-4 pb-8 w-fit   h-fit flex flex-col items-center gap-2 rounded-md">
+    <form onSubmit={submitVacation} className="bg-gray-300 w-full p-4 pb-8 w-fit h-fit flex flex-col items-center gap-2 rounded-md">
 
         <div  className=" flex flex-row items-center gap-1">
-            Szabira mentem
+            <p className="font-bold text-lg">Szabira mentem</p>
             <Checkbox 
                 checked={checked} 
                 onChange={handleChange} 
@@ -46,9 +42,14 @@ const AdminForm_vacation = () => {
         <textarea className="w-full h-36 bg-white" value={fieldText} onChange={handleVacationsTextInput}>
         </textarea>
 
-        <button className="btn w-28 bg-green-300 hover:bg-green-400" type="submit">
-            Mentés
-        </button>
+        <div>
+            <button className="btn w-28 bg-green-300 hover:bg-green-400 text-black" type="submit">
+                Mentés
+            </button>
+            <button className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={() => setIsLoggedIn(false)}>
+                Kijelentkezek
+            </button>
+        </div>
 
     </form>
   )

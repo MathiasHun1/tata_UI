@@ -85,10 +85,10 @@ const AdminForm_openings = ({ setIsLoggedIn }) => {
         </div>
         <br />
         <div>
-          <button className="btn w-28 bg-green-300 hover:bg-green-400" type="submit">
+          <button className="btn w-28 bg-green-300 hover:bg-green-400 text-black" type="submit">
             Mentés
           </button>
-          <button className="btn w-28 bg-red-300 hover:bg-red-400" onClick={logOut}>
+          <button className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={logOut}>
             Kijelentkezek
           </button>
         </div>
