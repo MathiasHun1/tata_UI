@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { saveVacationData } from "../app/vacationsSlice"
 
-const AdminForm_vacation = ({ setIsLoggedIn }) => {
+const AdminForm_vacation = ({ logOut }) => {
     const [checked, setChecked] = useState(false)
     const [fieldText, setFieldText] = useState('')
     const vacationsData = useSelector(state => state.vacation)
@@ -46,7 +46,7 @@ const AdminForm_vacation = ({ setIsLoggedIn }) => {
             <button className="btn w-28 bg-green-300 hover:bg-green-400 text-black" type="submit">
                 Mentés
             </button>
-            <button className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={() => setIsLoggedIn(false)}>
+            <button type="button" className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={logOut}>
                 Kijelentkezek
             </button>
         </div>

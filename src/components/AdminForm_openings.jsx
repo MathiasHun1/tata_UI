@@ -3,7 +3,7 @@ import { updateDay } from "../app/openingsSlice"
 import { useState } from "react"
 import Checkbox from '@mui/material/Checkbox'
 
-const AdminForm_openings = ({ setIsLoggedIn }) => {
+const AdminForm_openings = ({ logOut }) => {
   const [checked, setChecked] = useState(false)
   const [formData, setFormData ] = useState({
     day: 'monday',
@@ -39,11 +39,6 @@ const AdminForm_openings = ({ setIsLoggedIn }) => {
       ...formData,
       [name]: value
     })
-  }
-
-  const logOut = () => {
-    setIsLoggedIn(false)
-    setPassText('')
   }
 
   const handleChange = (e) => {
@@ -88,7 +83,7 @@ const AdminForm_openings = ({ setIsLoggedIn }) => {
           <button className="btn w-28 bg-green-300 hover:bg-green-400 text-black" type="submit">
             Mentés
           </button>
-          <button className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={logOut}>
+          <button type='button' className="btn w-28 bg-red-300 hover:bg-red-400 text-black" onClick={logOut}>
             Kijelentkezek
           </button>
         </div>

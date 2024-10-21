@@ -36,6 +36,11 @@ const Admin = () => {
     setPassText('')
   }
 
+  const logOut = () =>{
+    setIsLoggedIn(false)
+    setPassText('')
+  }
+
   if(!isLoggedIn) {
     return (
       <div>
@@ -55,14 +60,14 @@ return (
   <div className="flex flex-col justify-center gap-6">
 
     <div className="flex flex-col items-center ">
-      <AdminForm_openings setIsLoggedIn={setIsLoggedIn} />
+      <AdminForm_openings logOut={logOut} />
       <ErrorMessage />
       <SuccessMessage />
     </div>
 
     
     <div className="flex flex-col items-center">
-      <AdminForm_vacation setIsLoggedIn={setIsLoggedIn}/>
+      <AdminForm_vacation logOut={logOut}/>
     </div>
 
   </div>
