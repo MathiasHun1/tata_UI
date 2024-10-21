@@ -8,19 +8,22 @@ import NavBar_mobile from "./components/NavBar_mobile"
 import VacationCard from "./components/VacationCard"
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeOpeningDays } from "./app/openingsSlice"
+import { initializeVacationData } from "./app/vacationsSlice"
 
-function App({getState}) {
+function App() {
   // console.log('store:', getState());
   const openingDays = useSelector(state => state.openingDays)
   const isOnVacation = useSelector(state => state.vacation.onVacation)
+  const dataLoaded = (openingDays && isOnVacation !== undefined)
   
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeOpeningDays())
-  }, [dispatch])
+    dispatch(initializeVacationData())
+  }, [])
 
-  if(!openingDays) { return <LoadingPage /> } 
+  if(!dataLoaded) { return <LoadingPage /> } 
 
   return (
     <div className="relative text-black dark:bg-white">

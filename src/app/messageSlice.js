@@ -9,10 +9,13 @@ export const messageSlice = createSlice({
     reducers: {
         setErrorMessage(state, action) {
             state.errorMessageText = action.payload
+        },
+        setSuccessMessage(state, action) {
+            state.successMessageText = action.payload
         }
     }
 })
 
-export const { setErrorMessage } = messageSlice.actions
+export const { setErrorMessage, setSuccessMessage } = messageSlice.actions
 
 export default messageSlice.reducer

@@ -13,7 +13,6 @@ const getAllDays = () => {
 
 const updateDay = async (dayData) => {
   const response = await axios.put(`${baseUrl}/${dayData.day}`, {open: dayData.open, close: dayData.close})
-  console.log('server response data: ', response.data);
   return response.data
 }
 

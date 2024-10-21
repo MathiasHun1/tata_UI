@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import vacationPic from '../assets/vacation1.jpg'
 import { MaterialSymbol } from 'react-material-symbols'
 import 'react-material-symbols/rounded'
-// import services from '../services/data'
+import { useSelector } from 'react-redux'
 
-function VacationCard({ text }) {
+function VacationCard() {
   const [isHidden, setISHidden] = useState(false)
+  const text = useSelector(state => state.vacation.text)
 
   return (
     <div className={`w-full h-screen absolute top-0 z-20 bg-gray-800 bg-opacity-60 flex justify-center items-center ${isHidden ? 'hidden' : ''}`}>

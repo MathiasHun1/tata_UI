@@ -2,17 +2,18 @@ import axios from 'axios'
 
 const baseUrl = '/api/vacations'
 
-const getVacationsData = () => {
-    const request = axios.get(`${baseUrl}`)
-    return request.then(response => response.data)
+const getVacationsData = async () => {
+    const response = await axios.get(`${baseUrl}`)
+    return response.data
   }
   
-  const updateVacations = (vacationsData) => {
-    const request = axios.put(baseUrl, { 
-      onVacation: vacationsData.onVacation,
-      text: vacationsData.text
-    })
-    return request
-  }
+const updateVacations = async (vacationsData) => {
+  
+  const response = await axios.put(baseUrl, { 
+    onVacation: vacationsData.onVacation,
+    text: vacationsData.text
+  })
+  return response.data
+}
 
-  export default {getVacationsData, updateVacations}
+export default {getVacationsData, updateVacations}
