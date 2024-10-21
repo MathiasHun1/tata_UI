@@ -6,6 +6,7 @@ import { saveVacationData } from "../app/vacationsSlice"
 const AdminForm_vacation = ({ logOut }) => {
     const [checked, setChecked] = useState(false)
     const [fieldText, setFieldText] = useState('')
+    
     const vacationsData = useSelector(state => state.vacation)
     
     const dispatch = useDispatch()

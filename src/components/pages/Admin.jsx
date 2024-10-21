@@ -7,9 +7,10 @@ import { setErrorMessage } from "../../app/messageSlice"
 import SuccessMessage from "../SuccessMessage"
 import AdminForm_openings from "../AdminForm_openings"
 import AdminForm_vacation from "../AdminForm_vacation"
+import AdminForm_promotion from "../AdminForm_promotion"
 
 const Admin = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
   const [passText, setPassText] = useState('')
   
   const dispatch = useDispatch()
@@ -68,6 +69,10 @@ return (
     
     <div className="flex flex-col items-center">
       <AdminForm_vacation logOut={logOut}/>
+    </div>
+
+    <div className="flex flex-col items-center">
+      <AdminForm_promotion logOut={logOut}/>
     </div>
 
   </div>
