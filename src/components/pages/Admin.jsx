@@ -10,7 +10,7 @@ import AdminForm_vacation from "../AdminForm_vacation"
 import AdminForm_promotion from "../AdminForm_promotion"
 
 const Admin = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [passText, setPassText] = useState('')
   
   const dispatch = useDispatch()
