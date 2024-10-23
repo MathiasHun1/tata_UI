@@ -11,22 +11,13 @@ export const vacationsSlice = createSlice({
         initialize(state, action) {
             return action.payload
         },
-        turnOn(state, action) {
-            state.onVacation = true
-        },
-        turnOff(state, action) {
-            state.onVacation = false
-        },
-        toggleVacationState(state, action) {
-            state.onVacation = !state.onVacation
-        },
         setText(state, action) {
-            state.text = action.payload
+            state.text = action.payload.text
         }
     }
 })
 
-export const { turnOn, turnOff, toggleVacationState, setText, initialize } = vacationsSlice.actions
+export const { setText, initialize } = vacationsSlice.actions
 
 export const initializeVacationData = () => async (dispatch) => {
     try {
@@ -40,9 +31,10 @@ export const initializeVacationData = () => async (dispatch) => {
 export const saveVacationData = (credentials) => async (dispatch) => {
     try {
         const updatedData = await vacationsService.updateVacations(credentials)
-        dispatch(initialize(updatedData))
+        dispatch(setText(updatedData))
+        return Promise.resolve()
     } catch (error) {
-        console.log(error)
+        throw error
     }
 }
 

@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import loginService from '../../services/login'
-import { useDispatch } from 'react-redux'
-import { initializeVacationData } from "../../app/vacationsSlice"
-import ErrorMessage from "../ErrorMessage"
-import { setErrorMessage } from "../../app/messageSlice"
-import SuccessMessage from "../SuccessMessage"
 import AdminForm_openings from "../AdminForm_openings"
 import AdminForm_vacation from "../AdminForm_vacation"
 import AdminForm_promotion from "../AdminForm_promotion"
@@ -12,12 +7,7 @@ import AdminForm_promotion from "../AdminForm_promotion"
 const Admin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [passText, setPassText] = useState('')
-  
-  const dispatch = useDispatch()
-  
-  useEffect(() => {
-    dispatch(initializeVacationData())
-  }, [dispatch])
+  const [errorMessageText, setErrorMessageText] = useState('')
   
   const handlePassInputChange = (e) => {
     setPassText(e.target.value)
@@ -29,10 +19,14 @@ const Admin = () => {
       await loginService.login(passText)
       setIsLoggedIn(true)
     } catch (error) {
-      dispatch(setErrorMessage('hibas jelszo'))
-      setTimeout(() => {
-        dispatch(setErrorMessage(''))
-      }, 3000)
+      
+      if(error.status === 401) {
+        setErrorMessageText('hibás jelszó')
+      } else {
+        setErrorMessageText('szerver probléma')
+      }
+      
+      setTimeout(() => { setErrorMessageText('') }, 3000)
     }
     setPassText('')
   }
@@ -48,11 +42,13 @@ const Admin = () => {
       <form onSubmit={handleLogin}>
         <label>
           Jelszó:
-          <input type="password" value={passText} onChange={handlePassInputChange} className="border-2 border-black px-2 dark:bg-slate-100"/>
+          <input type="password" value={passText} onChange={handlePassInputChange} className="border-2 border-black px-2 dark:bg-slate-100" id="password"/>
         </label>
         <button className="btn">OK</button>
       </form>
-      <ErrorMessage />
+      {errorMessageText && (
+        <p className='text-red-600 text-center font-bold'>{errorMessageText}</p>
+      )}
     </div>
   )
 }
@@ -62,10 +58,7 @@ return (
 
     <div className="flex flex-col items-center ">
       <AdminForm_openings logOut={logOut} />
-      <ErrorMessage />
-      <SuccessMessage />
     </div>
-
     
     <div className="flex flex-col items-center">
       <AdminForm_vacation logOut={logOut}/>

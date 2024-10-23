@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux"
 import { updateDay } from "../app/openingsSlice"
 import { useState } from "react"
 import Checkbox from '@mui/material/Checkbox'
+import SuccessMessage from "./SuccessMessage"
+import ErrorMessage from "./ErrorMessage"
 
 const AdminForm_openings = ({ logOut }) => {
   const [checked, setChecked] = useState(false)
@@ -10,10 +12,13 @@ const AdminForm_openings = ({ logOut }) => {
     open: '',
     close: ''
   })
+  const [ successMessageOn, setSuccessMessage ] = useState(false) 
+  const [ errorMessage, setErrormessage ] = useState(false) 
 
   const dispatch = useDispatch()
 
-  const submitDayOpening = (e) => {
+
+  const submitDayOpening = async (e) => {
     e.preventDefault()
 
     let dayObject = { ...formData }
@@ -22,15 +27,24 @@ const AdminForm_openings = ({ logOut }) => {
       dayObject.close = null
     }
 
-    dispatch(updateDay(dayObject))
-
-    setFormData({
-      day: 'monday',
-      open: '',
-      close: ''
-    })
-
-    setChecked(false)
+    try {
+      await dispatch(updateDay(dayObject))
+  
+      setFormData({
+        day: 'monday',
+        open: '',
+        close: ''
+      })
+  
+      setChecked(false)
+      setSuccessMessage(true)
+      setTimeout(() => { setSuccessMessage(false) }, 3000)
+    } catch (error) {
+      console.log(error);
+      
+      setErrormessage(true)
+      setTimeout(() => { setErrormessage(false) }, 3000)
+    }
   }
 
   const handleInputChange = (e) => {
@@ -87,6 +101,8 @@ const AdminForm_openings = ({ logOut }) => {
             Kijelentkezek
           </button>
         </div>
+        {successMessageOn && (<SuccessMessage />)}
+        {errorMessage && (<ErrorMessage />)}
       </form>
   )
 }

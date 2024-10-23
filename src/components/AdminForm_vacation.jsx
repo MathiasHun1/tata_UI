@@ -2,18 +2,24 @@ import { Checkbox } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { saveVacationData } from "../app/vacationsSlice"
+import SuccessMessage from "./SuccessMessage"
+import ErrorMessage from "./ErrorMessage"
 
 const AdminForm_vacation = ({ logOut }) => {
     const [checked, setChecked] = useState(false)
     const [fieldText, setFieldText] = useState('')
+    const [ successMessageOn, setSuccessMessage ] = useState(false) 
+    const [ errorMessage, setErrormessage ] = useState(false)
     
-    const vacationsData = useSelector(state => state.vacation)
+    const vacationsText = useSelector(state => state.vacation.text)
+    const isVacationRunning = useSelector(state => state.vacation.onVacation)
     
     const dispatch = useDispatch()
 
     useEffect(() => {
-        setFieldText(vacationsData.text)
-    }, [vacationsData.text])
+        setChecked(isVacationRunning)
+        setFieldText(vacationsText)
+    }, [vacationsText, isVacationRunning])
 
     const handleChange = () => {
         setChecked(!checked)
@@ -23,10 +29,18 @@ const AdminForm_vacation = ({ logOut }) => {
         setFieldText(e.target.value)
     }
 
-    const submitVacation = (e) => {
+    const submitVacation = async (e) => {
         e.preventDefault()
-        const updatedData = { onVacation: checked, text: fieldText}
-        dispatch(saveVacationData(updatedData))
+        try {
+            const updatedData = { onVacation: checked, text: fieldText}
+            await dispatch(saveVacationData(updatedData))
+            setSuccessMessage(true)
+            setTimeout(() => { setSuccessMessage(false) }, 3000)
+        } catch (error) {
+            setErrormessage(true)
+            setTimeout(() => { setErrormessage(false) }, 3000)
+            console.log(error);
+        }
     }
 
   return (
@@ -51,7 +65,8 @@ const AdminForm_vacation = ({ logOut }) => {
                 Kijelentkezek
             </button>
         </div>
-
+        {successMessageOn && (<SuccessMessage />)}
+        {errorMessage && (<ErrorMessage />)}
     </form>
   )
 }

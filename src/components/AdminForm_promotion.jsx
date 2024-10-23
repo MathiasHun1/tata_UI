@@ -2,11 +2,14 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Checkbox } from "@mui/material"
 import { saveNewPromotion } from "../app/promotionSlice"
-
+import SuccessMessage from "./SuccessMessage"
+import ErrorMessage from "./ErrorMessage"
 
 const AdminForm_promotion = ({ logOut }) => {
     const [checked, setChecked] = useState(false)
     const [fieldText, setFieldText] = useState('')
+    const [ successMessageOn, setSuccessMessage ] = useState(false) 
+    const [ errorMessage, setErrormessage ] = useState(false) 
 
     const isPromoRunning = useSelector(state => state.promotion.onPromotion)
     const promtotionText = useSelector(state => state.promotion.text)
@@ -18,9 +21,18 @@ const AdminForm_promotion = ({ logOut }) => {
         setFieldText(promtotionText)
     }, [isPromoRunning, promtotionText])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(saveNewPromotion({ onPromotion: checked, text: fieldText }))
+        
+        try {
+            await dispatch(saveNewPromotion({ onPromotion: checked, text: fieldText }))
+            setSuccessMessage(true)
+            setTimeout(() => { setSuccessMessage(false) }, 3000)
+        } catch (error) {
+            setErrormessage(true)
+            setTimeout(() => { setErrormessage(false) }, 3000)
+            console.log(error);
+        }
     }
 
     const toggleOnPromotion = () => {
@@ -53,7 +65,8 @@ const AdminForm_promotion = ({ logOut }) => {
                 Kijelentkezek
             </button>
         </div>
-
+        {successMessageOn && (<SuccessMessage />)}
+        {errorMessage && (<ErrorMessage />)}
     </form>
   )
 }

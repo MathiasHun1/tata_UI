@@ -34,15 +34,9 @@ export const updateDay = (credentials) => async (dispatch) => {
     try {
         const result = await openingsService.updateDay(credentials)
         dispatch(update(result))
-        dispatch(setSuccessMessage('Mentés sikeres'))
-        setTimeout(() => {
-            dispatch(setSuccessMessage(''))
-        }, 3000)
+        return Promise.resolve()
     } catch (error) {
-        dispatch(setErrorMessage('Valamit rosszul írtál Kutya'))
-        setTimeout(() => {
-            dispatch(setErrorMessage(''))
-        }, 3000)
+        throw error
     }
 }
 

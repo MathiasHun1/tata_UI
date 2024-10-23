@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react'
 import promotionPic from '../assets/akcio.jpg'
 
 
-const PromotionCard = ({getState}) => {
+const PromotionCard = () => {
   const visibleByDefault = useSelector(state => state.promotion.onPromotion)
   const text = useSelector(state => state.promotion.text)
+  //local state that can be toggled if user closes the card
   const [ visibleLocally, setVisibleLocally ] = useState(false)
 
   useEffect(() =>{
@@ -28,7 +29,6 @@ const PromotionCard = ({getState}) => {
           <MaterialSymbol icon="close" size={25} fill={true} grade={-25} color='black' />
         </div>
 
-      
       </div>
         <p className="text-center w-auto text-xl absolute bottom-20">
         ― Tatamoto ―

@@ -18,4 +18,11 @@ export const messageSlice = createSlice({
 
 export const { setErrorMessage, setSuccessMessage } = messageSlice.actions
 
+export const showThenHideSuccessMessage = (ms) => dispatch => {
+    dispatch(setSuccessMessage('Mentés sikeres'))
+    setTimeout(() => {
+        dispatch(setSuccessMessage(''))
+    }, ms)
+}
+
 export default messageSlice.reducer

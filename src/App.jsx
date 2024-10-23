@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { BrowserRouter as Router } from 'react-router-dom'
 import Header from "./components/Header"
 import Main from "./components/Main"
@@ -12,11 +12,11 @@ import { initializeOpeningDays } from "./app/openingsSlice"
 import { initializeVacationData } from "./app/vacationsSlice"
 import { initializePromotions } from "./app/promotionSlice"
 
-function App({ getState }) {
-  // console.log('store:', getState());
+function App() {
   const openingDays = useSelector(state => state.openingDays)
   const isOnVacation = useSelector(state => state.vacation.onVacation)
-  const dataLoaded = (openingDays && isOnVacation !== undefined)
+  const isOnPromotion = useSelector(state => state.promotion.onPromotion)
+  const dataLoaded = (openingDays && isOnVacation !== undefined && isOnPromotion !== undefined)
   
   const dispatch = useDispatch()
 
@@ -30,19 +30,18 @@ function App({ getState }) {
 
   return (
     <div className="relative text-black dark:bg-white">
+
       <Router>
           <Header openingsData={openingDays} />
           <NavBar_mobile />
           <div className="flex flex-row">
-            <Main 
-              openingsData={openingDays}  />
+            <Main />
             <Aside />
           </div>
       </Router>
-      {isOnVacation && (
-        <VacationCard />
-      )}
-      <PromotionCard getState={getState} />
+
+      <VacationCard />
+      <PromotionCard />
     </div>
   )
 }
