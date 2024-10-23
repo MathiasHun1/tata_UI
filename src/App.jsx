@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 import { BrowserRouter as Router } from 'react-router-dom'
 import Header from "./components/Header"
 import Main from "./components/Main"
@@ -14,9 +14,7 @@ import { initializePromotions } from "./app/promotionSlice"
 
 function App() {
   const openingDays = useSelector(state => state.openingDays)
-  const isOnVacation = useSelector(state => state.vacation.onVacation)
-  const isOnPromotion = useSelector(state => state.promotion.onPromotion)
-  const dataLoaded = (openingDays && isOnVacation !== undefined && isOnPromotion !== undefined)
+  const dataLoaded = (openingDays !== null)
   
   const dispatch = useDispatch()
 

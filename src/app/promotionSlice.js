@@ -23,7 +23,9 @@ export const { setPromo, savePromo } = promotionSlice.actions
 export const initializePromotions = () => async (dispatch) => {
     try {
         const result = await promotionService.get()
-        dispatch(setPromo(result))
+        setTimeout(() => {
+            dispatch(setPromo(result))
+        }, 2000)
     } catch (error) {
         console.log(error);
     }
