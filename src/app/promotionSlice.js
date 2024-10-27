@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import promotionService from '../services/promotion'
-import { showThenHideSuccessMessage } from './messageSlice'
 
 export const promotionSlice = createSlice({
     name: 'promotion',

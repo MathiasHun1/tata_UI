@@ -22,7 +22,7 @@ function App() {
     dispatch(initializeOpeningDays())
     dispatch(initializeVacationData())
     dispatch(initializePromotions())
-  }, [])
+  }, [dispatch])
 
   if(!dataLoaded) { return <LoadingPage /> } 
 

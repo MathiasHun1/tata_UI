@@ -16,7 +16,10 @@ const Admin = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      await loginService.login(passText)
+      const response = await loginService.login(passText)
+      const { token } = response
+      window.localStorage.setItem('token', token)
+      loginService.setToken(token)
       setIsLoggedIn(true)
     } catch (error) {
       
@@ -34,6 +37,7 @@ const Admin = () => {
   const logOut = () =>{
     setIsLoggedIn(false)
     setPassText('')
+    localStorage.removeItem('token')
   }
 
   if(!isLoggedIn) {

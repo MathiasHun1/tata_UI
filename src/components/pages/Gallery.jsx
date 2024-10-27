@@ -1,5 +1,4 @@
 import ImageCard from '../ImageCard'
-import fblogo from '../../assets/fblogo.svg'
 import szerelo from '../../assets/szerelo.jpeg'
 import muhely1 from '../../assets/muhely-1.jpeg'
 import muhely2 from '../../assets/muhely-2.jpeg'
@@ -25,10 +24,6 @@ import { useState } from 'react'
 
 function Gallery() {
   const [clickedImage, setClickedImage] = useState(null)
-
-  const resetClicked = () => {
-    setClickedImage(null)
-  }
   
   const style = {
     'height': 'fit-content',

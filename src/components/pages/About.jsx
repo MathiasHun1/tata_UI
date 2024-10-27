@@ -1,4 +1,3 @@
-import bmwpic from '../../assets/bmw.svg'
 import scooter from '../../assets/scooter.jpg'
 
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import loginService from './login'
 
 const baseUrl = '/api/promotions'
 
@@ -8,7 +9,7 @@ const get = async () => {
 }
 
 const set = async (credentials) => {
-    const response = await axios.post(baseUrl, credentials)
+    const response = await axios.post(baseUrl, credentials, loginService.setHeader())
     return response.data
 }
 

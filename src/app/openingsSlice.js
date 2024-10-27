@@ -1,6 +1,6 @@
+/* eslint-disable no-useless-catch */
 import { createSlice } from "@reduxjs/toolkit";
 import openingsService from "../services/openings";
-import { setErrorMessage, setSuccessMessage } from "./messageSlice";
 
 export const openingsSlice = createSlice({
     name: 'openings',

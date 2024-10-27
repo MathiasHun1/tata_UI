@@ -1,11 +1,9 @@
-import { Fragment } from "react"
-import ReviewCard from "./ReviewCard"
 import googleImg from '../assets/google-logo.svg'
 import StarsSVGs from "./StarsSVGs"
 import fblogo from '../assets/fblogo.svg'
 import { mapRedirectUrl } from "./helpers"
 
-function Aside({isDataLoaded, reviewsList, reviewsAvg, reviewsQuant}) {
+function Aside() {
   return (
     <aside className="flex flex-col items-center hidden sm:flex">
 

@@ -3,9 +3,8 @@ import fblogo from '../../assets/fblogo.svg'
 import googlelogo from '../../assets/google-logo.svg'
 import { mapRedirectUrl } from '../helpers';
 import { translateDay, transformOpening } from '../helpers';
-import LoadingPage from '../LoadingPage';
 import Phone_num from '../Phone_num';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const mapStyle = {
   width: '100%',
@@ -16,9 +15,8 @@ const mapStyle = {
   overflow: 'hidden' // Ensure the map respects the border radius
 };
 
-function Contacts({openingsData}) {
+function Contacts() {
   const openingDays = useSelector(state => state.openingDays)
-  const dispatch = useDispatch()
 
   return (
     <div className='max-w-4xl px-12 pt-4 sm:pt-0 mx-auto flex flex-col items-center gap-10'>

@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react"
-import { SocialIcon } from 'react-social-icons'
+import { useState } from "react"
 import Button from "./Button"
 import { Link } from 'react-router-dom'
 
@@ -19,7 +18,7 @@ function Navbar() {
             </Link>
             <Link to={'/contacts'}>
               <Button active={active} setActive={setActive} text='Kapcsolat' />
-            </Link>
+            </Link> 
           </div>
       </nav>
     </div>
